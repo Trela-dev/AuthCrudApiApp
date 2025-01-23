@@ -1,5 +1,5 @@
 
-# Simple CRUD API with Authentication
+# CRUD API with JWT Authentication
 
 ## Project Description
 

@@ -1,133 +1,135 @@
 
 # Simple CRUD API with Authentication
-## Opis Projektu
 
-Projekt realizuje aplikację **CRUD** z autoryzacją użytkowników, która umożliwia:
+## Project Description
 
-- **Rejestrację użytkowników**  
-- **Logowanie użytkowników**  
-- **Przeglądanie listy użytkowników**  
-- **Usuwanie użytkowników po ID**  
-- **Aktualizowanie danych użytkowników**  
+This project implements a **CRUD** application with user authentication that allows:
 
-Dostęp do endpointów służących do **wyświetlania listy użytkowników**, **usuwania użytkownika** oraz **aktualizowania danych użytkownika** wymaga **autoryzacji** przy użyciu tokena **JWT** (JSON Web Token).
+- **User registration**  
+- **User login**  
+- **Viewing a list of users**  
+- **Deleting users by ID**  
+- **Updating user details**  
 
-Aplikacja korzysta z bazy danych **PostgreSQL**, która działa w kontenerze **Docker**, co umożliwia łatwe uruchomienie i zarządzanie środowiskiem.
+Access to the endpoints for **viewing the user list**, **deleting a user**, and **updating user details** requires **authorization** using a **JWT** (JSON Web Token).  
 
-
-
-## Wymagania
-- **Docker**: do uruchamiania kontenerów aplikacji i bazy danych.  
-- **Postman**: do testowania endpointów API.  
-- **Java 17**: wymagana wersja Javy.  
-- **Maven**: do budowy aplikacji.  
-- -**Spring Boot**: framework do tworzenia aplikacji backendowej.
+The application uses a **PostgreSQL** database running in a **Docker** container, making it easy to set up and manage the environment.
 
 ---
 
-## Instrukcja Uruchomienia
+## Requirements
 
-### Krok 1: Przygotowanie środowiska
-1. Upewnij się, że masz zainstalowane:
+- **Docker**: For running the application and database containers.  
+- **Postman**: For testing API endpoints.  
+- **Java 17**: Required version of Java.  
+- **Maven**: For building the application.  
+- **Spring Boot**: Framework for developing the backend application.
+
+---
+
+## Setup Instructions
+
+### Step 1: Prepare the Environment
+
+1. Make sure you have installed:
    - Docker  
    - Java 17  
    - Maven  
    - Postman  
-2. Skopiuj projekt do wybranego katalogu na swoim komputerze.
+2. Clone the project to your desired directory on your computer.
 
 ---
-### Krok 2: Uruchomienie bazy danych PostgreSQL w Dockerze 
-1. Otwórz terminal i przejdź do katalogu projektu(tam gdzie jest plik pom.xml): 
+
+### Step 2: Start PostgreSQL Database in Docker
+
+1. Open a terminal and navigate to the project directory (where the `pom.xml` file is located):  
 
 ```bash
-cd "ścieżka/projektu"
+cd "path/to/project"
 ```
-2.  Uruchom kontener z bazą danych PostgreSQL:
-    
- ```bash
+
+2. Start the PostgreSQL database container:  
+
+```bash
 docker-compose up -d db
 ```
-Jeśli kontener uruchomi się poprawnie, baza danych będzie dostępna.
+
+If the container starts successfully, the database will be ready.
 
 ---
-### Krok 2: Uruchomienie bazy danych PostgreSQL w Dockerze 
 
-1. Będąc w katalogu projektu, zbuduj aplikację za pomocą Maven(tam gdzie jest plik pom.xml):
- ```bash
+### Step 3: Build and Run the Application
+
+1. While in the project directory, build the application using Maven:  
+
+```bash
 ./mvnw clean install -DskipTests
 ```
-2. Przejdź do katalogu `target` (wewnątrz projektu) i uruchom aplikację komendą poniżej.
 
- 
- ```bash
+2. Navigate to the `target` directory (inside the project folder) and start the application with the following command:
+
+```bash
 java -jar AuthCrudApiApp-0.0.1-SNAPSHOT.jar
 ```
 
 ---
-### Krok 4: Testowanie API w Postman
 
-1. Otwórz Postman i wejdź na adres http://localhost:8080 pod tym adresem będziesz mógł używać różnych endpointów.
-#### Endpoint rejestracji użytkownika:
-http://localhost:8080/register
-W body umieść następujące dane:
- ```bash
-    {
-      "username": "nazwa_uzytkownika",
-      "password": "haslo"
-    }
+### Step 4: Test the API with Postman
+
+1. Open Postman and navigate to `http://localhost:8080` to use the available endpoints.
+
+#### User Registration Endpoint:
+`POST http://localhost:8080/register`  
+In the body, provide the following data:
+```json
+{
+  "username": "your_username",
+  "password": "your_password"
+}
 ```
 
-#### Endpoint logowania użytkownika:
-POST http://localhost:8080/register
-W body umieść następujące dane:
- ```bash
-    {
-      "username": "nazwa_uzytkownika",
-      "password": "haslo"
-    }
+#### User Login Endpoint:
+`POST http://localhost:8080/login`  
+In the body, provide the following data:
+```json
+{
+  "username": "your_username",
+  "password": "your_password"
+}
 ```
-Po pomyślnym zalogowaniu otrzymasz token JWT, który jest niejakim biletem wstępu do innych komend.
 
-#### Endpoint logowania użytkownika:
-POST http://localhost:8080/register
-W body umieść następujące dane:
- ```bash
-    {
-      "username": "nazwa_uzytkownika",
-      "password": "haslo"
-    }
-```
-Po pomyślnym zalogowaniu otrzymasz token JWT, który jest niejakim biletem wstępu do innych endpointów.
+After successful login, you will receive a JWT token, which acts as a key for accessing other endpoints.
 
+#### Retrieve All Users Endpoint:
+`GET http://localhost:8080/users`
 
-#### Endpoint wyświetlania wszystkich użytkowników:
-GET http://localhost:8080/users
+#### Delete a User by ID Endpoint:
+`DELETE http://localhost:8080/users/3`  
+This will delete the user with ID `3` (example).
 
-#### Endpoint usuwania użytkownika o danym id:
- DELETE http://localhost:8080/users/3
-Usuń użytkownika o id 3 (przykładowo)
-
-#### Endpoint aktualizowania użytkownika z danym id:
- PUT  http://localhost:8080/users/3
-W body umieść następujące dane:
- ```bash
-    {
-      "username": "nazwa_uzytkownika",
-      "password": "haslo"
-    }
+#### Update a User by ID Endpoint:
+`PUT http://localhost:8080/users/3`  
+In the body, provide the following data:
+```json
+{
+  "username": "new_username",
+  "password": "new_password"
+}
 ```
 
 ---
-### Konfiguracja
 
- Zmienianie zmiennych, takich jak token JWT, w pliku konfiguracyjnym W pliku konfiguracyjnym aplikacji (`application.properties` )możesz łatwo zmieniać zmienne, takie jak dane połączenia z bazą danych czy klucz dla tokenu JWT. 
-Plik `application.properties`  znajduje się w /target/classes
+### Configuration
+
+To modify variables such as the JWT token secret or database connection details, you can edit the configuration file (`application.properties`).  
+The `application.properties` file is located in `/target/classes`.
 
 ---
-### Użyte technologie
--   **Spring Boot** do stworzenia aplikacji webowej i zarządzania backendem.
--   **JWT** do autoryzacji i uwierzytelniania użytkowników.
--   **PostgreSQL** jako baza danych do przechowywania danych.
--   **Docker** do uruchomienia aplikacji i bazy danych w kontenerach.
--   **Maven** do zarządzania zależnościami i kompilacji projektu.
 
+### Technologies Used
+
+- **Spring Boot**: For creating the web application and managing the backend.  
+- **JWT**: For user authentication and authorization.  
+- **PostgreSQL**: As the database for storing user data.  
+- **Docker**: For running the application and database in containers.  
+- **Maven**: For managing dependencies and building the project.

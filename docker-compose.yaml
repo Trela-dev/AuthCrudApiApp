@@ -1,0 +1,25 @@
+
+
+services:
+  # PostgreSQL database container
+  db:
+    image: postgres:13
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: crud
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: crud-database
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - myapp-network
+
+networks:
+  myapp-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

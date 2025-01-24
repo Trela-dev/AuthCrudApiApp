@@ -128,8 +128,9 @@ The `application.properties` file is located in `/target/classes`.
 
 ### Technologies Used
 
-- **Spring Boot**: For creating the web application and managing the backend.  
-- **JWT**: For user authentication and authorization.  
-- **PostgreSQL**: As the database for storing user data.  
-- **Docker**: For running the application and database in containers.  
-- **Maven**: For managing dependencies and building the project.
+-Spring Boot: For creating the web application and managing the backend.
+-JWT: For user authentication and authorization.
+-PostgreSQL: As the database for storing user data.
+-Hibernate: For Object-Relational Mapping (ORM) to interact with the PostgreSQL database seamlessly.
+-Docker: For running the application and database in containers.
+-Maven: For managing dependencies and building the project.

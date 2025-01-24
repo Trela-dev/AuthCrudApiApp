@@ -76,7 +76,7 @@ java -jar AuthCrudApiApp-0.0.1-SNAPSHOT.jar
 
 ### Step 4: Test the API with Postman
 
-1. Open Postman and navigate to `http://localhost:8080` to use the available endpoints.
+1.Launch Postman and access `http://localhost:8080` to interact with the available endpoints. Ensure you avoid using new lines or pressing Enter, as this may cause the endpoint to malfunction.
 
 #### User Registration Endpoint:
 `POST http://localhost:8080/register`  

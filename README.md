@@ -60,13 +60,13 @@ If the container starts successfully, the database will be ready.
 
 ### Step 3: Build and Run the Application
 
-1. While in the project directory, build the application using Maven:  
+1. While in the project directory (where the `pom.xml` file is located), build the application using Maven:  
 
 ```bash
 ./mvnw clean install -DskipTests
 ```
 
-2. Navigate to the `target` directory (inside the project folder) and start the application with the following command:
+2.Navigate to the `target` directory (inside the project folder). Before starting the application, make sure the .jar file has been built successfully. Then, start the application with the following command::
 
 ```bash
 java -jar AuthCrudApiApp-0.0.1-SNAPSHOT.jar
